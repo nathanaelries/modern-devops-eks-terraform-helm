@@ -1,0 +1,5 @@
+# All variables have sensible dev defaults. Override here if needed:
+#
+# region           = "us-west-2"
+# eks_cluster_name = "my-cluster"
+# vpc_cidr         = "10.10.0.0/16"

@@ -73,7 +73,7 @@ See [docs/architecture.md](docs/architecture.md) for component-level diagrams (n
 | Phase | Status | Description |
 |-------|--------|-------------|
 | 0. Scaffold + README + diagrams | Done | Repo structure, polished README, architecture diagrams, license |
-| 1. Terraform foundation | Pending | Remote state bootstrap, VPC module, dev environment composition |
+| 1. Terraform foundation | Done | Remote state bootstrap, VPC module, dev environment composition |
 | 2. EKS + supporting services | Pending | EKS cluster, managed node groups, ECR, RDS, IAM/IRSA |
 | 3. Sample application | Pending | Node.js doc-processing app + Dockerfile |
 | 4. Helm chart | Pending | Custom chart for app + ALB Ingress |
@@ -83,7 +83,30 @@ See [docs/architecture.md](docs/architecture.md) for component-level diagrams (n
 
 ## Quick Start
 
-> Implementation has not yet landed. Once Phase 1 completes, this section will document `terraform init / plan / apply` flow and required AWS prerequisites (account, OIDC provider, IAM role).
+**Prerequisites:** Terraform 1.7+, AWS CLI configured with admin (or equivalent) credentials, an AWS account.
+
+**1. Bootstrap remote state** (one-time per account):
+
+```bash
+cd terraform/bootstrap
+terraform init
+terraform apply
+```
+
+Note the `state_bucket` output — you'll reference it in the dev environment's `backend.hcl`.
+
+**2. Provision the dev environment:**
+
+```bash
+cd ../environments/dev
+cp backend.hcl.example backend.hcl
+# Edit backend.hcl: set bucket = "modern-devops-tfstate-<your-account-id>"
+terraform init -backend-config=backend.hcl
+terraform plan
+terraform apply
+```
+
+See [terraform/environments/dev/README.md](terraform/environments/dev/README.md) for details, outputs, and teardown.
 
 ## Why This Project?
 

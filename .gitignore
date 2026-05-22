@@ -45,3 +45,10 @@ helm-charts/**/charts/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Backend partial-config (account-specific; example is committed)
+backend.hcl
+!backend.hcl.example
+
+# Claude Code per-user settings (settings.json without .local is team-shared)
+.claude/settings.local.json

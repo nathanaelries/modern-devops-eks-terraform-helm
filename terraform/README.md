@@ -11,4 +11,7 @@ State is stored remotely in S3 with DynamoDB locking. The bootstrap procedure (c
 
 ## Status
 
-Phase 1 (Terraform foundation) is the next slice. This directory is currently a scaffold.
+- Phase 1 (foundation): **Done** — [`bootstrap/`](bootstrap/), [`modules/vpc/`](modules/vpc/), and [`environments/dev/`](environments/dev/) are present and applyable.
+- Phase 2 (EKS + supporting services): Pending.
+
+See the [top-level Quick Start](../README.md#quick-start) for how to run.
